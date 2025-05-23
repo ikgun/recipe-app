@@ -1,41 +1,41 @@
 services:
-  # recipe-postgres:
-  #   image: 'postgres:15'
-  #   container_name: 'recipe-postgres'
-  #   environment:
-  #     - POSTGRES_USER=recipe
-  #     - POSTGRES_PASSWORD=recipe
-  #     - POSTGRES_DB=recipedb
-  #   volumes:
-  #     - ./data/pgdata:/var/lib/postgresql/data
-  #   ports:
-  #     - "5432:5432"
-  #   restart: always
+   recipe-postgres:
+     image: 'postgres:15'
+     container_name: 'recipe-postgres'
+     environment:
+       - POSTGRES_USER=recipe
+       - POSTGRES_PASSWORD=recipe
+       - POSTGRES_DB=recipedb
+     volumes:
+       - ./data/pgdata:/var/lib/postgresql/data
+     ports:
+       - "5432:5432"
+     restart: always
 
-  # recipe-backend:
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile
-  #   image: recipe-app-backend
-  #   container_name: recipe-backend
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./:/usr/local/app
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #   depends_on:
-  #     - recipe-postgres
-  #   restart: on-failure
-
-  recipe-frontend:
-    build: ./frontend/Dockerfile
-    container_name: recipe-frontend
-    ports:
-      - "5173:5173"
-    volumes:
-      - /app/node_modules
-    command: npm run dev
-    restart: on-failure
-    # depends_on:
-    #   - recipe-backend
+   recipe-backend:
+     build:
+       context: ./backend
+       dockerfile: Dockerfile
+     image: recipe-app-backend
+     container_name: recipe-backend
+     ports:
+       - "8080:8080"
+     volumes:
+       - ./:/usr/local/app
+     environment:
+       - SPRING_PROFILES_ACTIVE=docker
+     depends_on:
+       - recipe-postgres
+     restart: on-failure
+#
+#  recipe-frontend:
+#    build: ./frontend/Dockerfile
+#    container_name: recipe-frontend
+#    ports:
+#      - "5173:5173"
+#    volumes:
+#      - /app/node_modules
+#    command: npm run dev
+#    restart: on-failure
+#    # depends_on:
+#    #   - recipe-backend

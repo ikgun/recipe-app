@@ -10,4 +10,4 @@ RUN mvn -f pom.xml clean package
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Dspring.profiles.active=docker","-jar","target/recipeapp-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=docker","-jar","backend/target/recipeapp-0.0.1-SNAPSHOT.jar"]
