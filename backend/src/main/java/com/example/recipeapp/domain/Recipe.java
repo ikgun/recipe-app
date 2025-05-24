@@ -1,26 +1,30 @@
 package com.example.recipeapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
+@Entity
+@Table(name = "Recipe")
 public class Recipe {
+
+    @Id
+    @GeneratedValue
     private UUID id;
+
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String ingredients;
+
+    @Column(nullable = false)
     private String instructions;
+
+    @Column(nullable = false)
     private String image;
 
-
-    @JsonCreator
-    public Recipe(
-            @JsonProperty("id") UUID id,
-            @JsonProperty("title") String title,
-            @JsonProperty("ingredients") String ingredients,
-            @JsonProperty("instructions") String instructions,
-            @JsonProperty("image") String image
-    ) {
+    public Recipe(UUID id, String title, String ingredients, String instructions, String image) {
         this.id = id;
         this.title = title;
         this.ingredients = ingredients;
@@ -28,12 +32,13 @@ public class Recipe {
         this.image = image;
     }
 
-    public UUID getId() {
-        return id;
+    public Recipe() {
+
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+
+    public UUID getId() {
+        return id;
     }
 
     public String getTitle() {
